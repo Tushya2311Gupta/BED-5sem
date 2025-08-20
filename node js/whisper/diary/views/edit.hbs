@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+</head>
+<body>
+  <h1>Edit Entry</h1>
+  <form id="editForm">
+    <textarea name="content" rows="10" cols="50">{{entry.content}}</textarea><br><br>
+    <button type="submit">Update</button>
+    <a href="/journal">Cancel</a>
+  </form>
+
+  <script>
+    document.getElementById('editForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const content = e.target.content.value.trim();
+      if (!content) return alert("Content cannot be empty.");
+
+      const res = await fetch(`/api/entries/{{entry._id}}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content })
+      });
+
+      if (res.ok) {
+        window.location.href = '/journal';
+      } else {
+        alert('Failed to update entry.');
+      }
+    });
+  </script>
+</body>
+</html>

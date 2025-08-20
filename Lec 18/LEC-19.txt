@@ -1,0 +1,3 @@
+i want to deelete a blog assosciated with a user id , if else user id is given in end path then "you are not allowed to delete this blog"
+
+here problem of transaction , concurrency too 

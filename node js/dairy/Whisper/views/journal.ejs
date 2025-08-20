@@ -1,0 +1,53 @@
+<%- include('partials/header', { title: 'Your Journal', userId: userId }) %>
+
+<h2>Your Journal Entries</h2>
+
+<!-- Add New Entry Form (show only if not editing) -->
+<% if (!editEntry) { %>
+  <h3>Add New Entry</h3>
+  <form method="POST" action="/journal/new">
+    <label>Title: <input type="text" name="title" required /></label><br/>
+    <label>Content:<br/>
+      <textarea name="content" rows="5" required></textarea>
+    </label><br/>
+    <button type="submit">Add Entry</button>
+  </form>
+<% } %>
+
+<!-- Edit Entry Form -->
+<% if (editEntry) { %>
+  <h3>Edit Entry</h3>
+  <form method="POST" action="/journal/edit/<%= editEntry._id %>">
+    <label>Title:
+      <input type="text" name="title" value="<%= editEntry.title %>" required />
+    </label><br/>
+    <label>Content:<br/>
+      <textarea name="content" rows="5" required><%= editEntry.content %></textarea>
+    </label><br/>
+    <button type="submit">Update Entry</button>
+    <a href="/journal">Cancel</a>
+  </form>
+<% } %>
+
+<hr/>
+
+<!-- List of entries -->
+<% if (entries.length === 0) { %>
+  <p>No journal entries yet.</p>
+<% } else { %>
+  <ul>
+    <% entries.forEach(entry => { %>
+      <li>
+        <h3><%= entry.title %></h3>
+        <p><%= entry.content %></p>
+        <small>Created on <%= entry.createdAt.toDateString() %></small><br/>
+        <a href="/journal?edit=<%= entry._id %>">Edit</a>
+        <form action="/journal/delete/<%= entry._id %>" method="POST" style="display:inline;">
+          <button type="submit" onclick="return confirm('Delete this entry?');">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<%- include('partials/footer') %>

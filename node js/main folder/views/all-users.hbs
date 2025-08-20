@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Users</title>
+</head>
+<body>
+    <h1>All Registered Users</h1>
+    <ul>
+        {{#each users}}
+            <li>{{this.name}} - {{this.email}}</li>
+        {{/each}}
+    </ul>
+    <a href="/">Back to Home</a>
+</body>
+</html>

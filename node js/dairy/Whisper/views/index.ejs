@@ -1,0 +1,11 @@
+<%- include('partials/header', { title: 'Welcome', userId: userId }) %>
+
+<h1>Welcome to Daily Journal</h1>
+
+<% if (userId) { %>
+  <p>Go to your <a href="/journal">Journal</a></p>
+<% } else { %>
+  <p>Please <a href="/login">Login</a> or <a href="/register">Register</a></p>
+<% } %>
+
+<%- include('partials/footer') %>
