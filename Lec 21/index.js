@@ -51,7 +51,7 @@ app.post("/api/auth/login", async (req, res) => {
                 message:"Invalid email"
             })
         }
-        if(userExist.password!=password){
+        if(userExist.password!= password){
             return res.json({
                 success:false,
                 message:"Invalid password"
